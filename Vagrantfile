@@ -13,13 +13,27 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "windows_10"
-  config.vm.box_url = "https://www.dropbox.com/s/rcxyts6ik3ybnxu/windows_10_vmware.box?dl=1"
+  # config.vm.box_url = "https://www.dropbox.com/s/rcxyts6ik3ybnxu/windows_10_vmware.box?dl=1"
+  config.vm.box_url = "file:///Users/hibri/Dropbox/vagrant/windows_10_vmware.box"
+  config.vm.communicator = :ssh
 
+  # Admin user name and password
+  config.winrm.username = "vagrant"
+  config.winrm.password = "vagrant"
+  config.vm.boot_timeout = 60
+
+  config.vm.guest = :windows
+  config.windows.halt_timeout = 15
+
+  config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+  config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
-
+   config.vm.communicator = :winrm
+   config.ssh.insert_key = false
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
@@ -39,6 +53,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  # config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -68,11 +83,12 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-   config.vm.provision "shell", 
-    inline: <<-SHELL
-     choco install chef-client
-   SHELL
-  config.vm.provision "chef_zero" do |chef|
+    # config.vm.provision "shell", 
+    #  path: "boot.ps1"
+
+  config.vm.provision "chef_solo" do |chef|
     chef.cookbooks_path = "cookbooks"
+    chef.install = false
+    # chef.add_recipie 'hello'
   end
 end
