@@ -12,9 +12,9 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "windows_10"
+  config.vm.box = "windows_2012_r2"
   # config.vm.box_url = "https://www.dropbox.com/s/rcxyts6ik3ybnxu/windows_10_vmware.box?dl=1"
-  config.vm.box_url = "file:///Users/hibri/Dropbox/vagrant/windows_10_vmware.box"
+  config.vm.box_url = "file:///Users/hibri/Dropbox/vagrant/windows_2012_r2_vmware.box"
   config.vm.communicator = :ssh
 
   # Admin user name and password
@@ -53,7 +53,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  # config.vm.synced_folder ".", "/vagrant", disabled: true
+   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -83,12 +83,13 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-    # config.vm.provision "shell", 
-    #  path: "boot.ps1"
+    config.vm.provision "shell", path: "boot.ps1"
+  # end
 
-  config.vm.provision "chef_solo" do |chef|
-    chef.cookbooks_path = "cookbooks"
-    chef.install = false
-    # chef.add_recipie 'hello'
+  config.librarian_puppet.puppetfile_dir = "puppet"
+  config.vm.provision "puppet" do |puppet|
+     puppet.module_path = "puppet/modules"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file = "default.pp"
   end
 end
