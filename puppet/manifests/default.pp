@@ -1,5 +1,5 @@
 include chocolatey
-include windowsfeature
+
 
 
 package { "google-chrome-x64":
@@ -8,6 +8,11 @@ package { "google-chrome-x64":
 }
 
 package { "sqlserver2014express":
+	ensure 		=> present,
+	provider 	=> 'chocolatey'
+}
+
+package { "sublimetext3":
 	ensure 		=> present,
 	provider 	=> 'chocolatey'
 }

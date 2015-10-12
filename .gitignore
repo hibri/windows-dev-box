@@ -1,1 +1,6 @@
 .vagrant
+.tmp/
+modules/
+.librarian
+.DS_Store
+*.lock
