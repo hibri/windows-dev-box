@@ -7,10 +7,7 @@ package { "google-chrome-x64":
 	provider 	=> 'chocolatey',
 }
 
-package { "sqlserver2014express":
-	ensure 		=> present,
-	provider 	=> 'chocolatey'
-}
+
 
 package { "sublimetext3":
 	ensure 		=> present,
@@ -33,10 +30,7 @@ package { "tortoisegit":
 	provider 	=> 'chocolatey'
 }
 
-package { "Visualstudio2013Professional":
-	ensure 		=> present,
-	provider 	=> 'chocolatey',
-}
+
 
 
 windowsfeature {'IIS':

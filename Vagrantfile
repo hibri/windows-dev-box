@@ -12,9 +12,9 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "windows_2012_r2"
+  config.vm.box = "windows_10"
   # config.vm.box_url = "https://www.dropbox.com/s/rcxyts6ik3ybnxu/windows_10_vmware.box?dl=1"
-  config.vm.box_url = "file:///Users/hibri/Dropbox/vagrant/windows_2012_r2_virtualbox.box"
+  config.vm.box_url = "file:///Users/hibri/Projects/iso/windows_10_vmware.box"
   config.vm.communicator = :ssh
 
   # Admin user name and password
