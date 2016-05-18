@@ -1,5 +1,5 @@
 include chocolatey
-
+include githubkey
 
 
 package { "google-chrome-x64":
@@ -29,8 +29,6 @@ package { "tortoisegit":
 	ensure 		=> present,
 	provider 	=> 'chocolatey'
 }
-
-
 
 
 windowsfeature {'IIS':

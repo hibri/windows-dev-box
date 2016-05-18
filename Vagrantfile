@@ -54,6 +54,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
    config.vm.synced_folder ".", "/vagrant", disabled: true
+  # config.vm.synced_folder "~/.ssh", "C:/Users/vagrant/.ssh"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -72,6 +73,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "vmware_fusion" do |v|
     v.gui = true
+    v.vmx["memsize"] = "4096"
+    v.vmx["numvcpus"] = "2"
   end
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
