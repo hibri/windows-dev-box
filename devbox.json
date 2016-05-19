@@ -1,0 +1,22 @@
+{
+	"builders" : [
+		{
+			"type": "vmware-vmx",
+			"source_path": ".vagrant/machines/default/vmware_fusion/6b3b0573-fa6b-43f2-8eae-31010c64cc78/packer-vmware-iso.vmx",
+			"ssh_username": "vagrant",
+      		"ssh_password": "vagrant",
+      		"ssh_wait_timeout": "2h",
+      		"name": "windows-10-dev",
+      		"shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\""
+		}
+	],
+		"post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "output": "windows_10_dev_{{.Provider}}.box",
+      "vagrantfile_template": "/Users/hibri/Projects/packer-windows/vagrantfile-windows_10.template"
+    }
+	]
+
+}
