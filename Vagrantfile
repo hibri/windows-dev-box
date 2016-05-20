@@ -12,10 +12,10 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "windows_10"
+  config.vm.box = "windows_10_dev"
   # config.vm.box_url = "https://www.dropbox.com/s/rcxyts6ik3ybnxu/windows_10_vmware.box?dl=1"
-  config.vm.box_url = "file:///Users/hibri/Projects/iso/windows_10_vmware.box"
-  config.vm.communicator = :ssh
+  config.vm.box_url = "https://www.dropbox.com/s/0wwuskh5ypylflr/windows_10_dev_vmware.box?dl=1"
+
 
   # Admin user name and password
   config.winrm.username = "vagrant"
@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
   config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
   config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
