@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "windows_10_dev"
   
-  config.vm.box_url = "file:///Users/hibri/Dropbox/vagrant/windows_10_dev_vmware.box"
+  config.vm.box_url = "http://example.com/windows_10_dev_vmware.box"
 
 
   # Admin user name and password
